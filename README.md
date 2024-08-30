@@ -64,8 +64,15 @@ For an example, check the file sets_predicates.txt
 python get_stats.py --input <input .nt file> --subset-preds <.txt file with the subset of predicates>
 ```
 
+We obtained the following stats from our dataset:
+- Frecuency of predicates [`P150`](http://www.wikidata.org/prop/direct/P150) and
+[`P131`](http://www.wikidata.org/prop/direct/P131) (representing containment
+relation) : 14,520,899
+- Frecuency of predicate [`P47`](http://www.wikidata.org/prop/direct/P47)
+(representing adjacency relation): 919,701
 
-
+![In-degree](img/in-degree.png) 
+![Out-degree](img/out-degree.png) 
 ## Query engines
 
 
