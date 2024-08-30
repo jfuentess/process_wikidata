@@ -1,0 +1,5 @@
+#Subset 1
+<http://www.wikidata.org/prop/direct/P150>
+<http://www.wikidata.org/prop/direct/P131>
+#Subset 2
+<http://www.wikidata.org/prop/direct/P47>

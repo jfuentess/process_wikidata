@@ -32,12 +32,39 @@ python remove_properties.py --input <input .nt file> --output <output .nt file>
 | After filter 2            | 1,617,500,079 (26 properties deleted)      |
 
 ## Continuous identifiers 
-The second step is to convert the filtered dataset into a new version using continuous identifiers for the subject/objects and predicates. The final format includes a `.nt` file and two dictionaries to convert identifiers to entries of the filtered dataset.
+The second step is to convert the filtered dataset into a new version using
+continuous identifiers for the subject/objects and predicates. The output
+dataset has extension `.nt.dat`. Additionally, two dictionaries are generate to convert identifiers to entries of
+the filtered dataset, one for subjects/objects (extensión `.nt.dat.SO`) and one
+for predicates (extension `.nt.dat.P`)
 
 ```sh
-g++ -O3 -o ttl2dat ttl2dat.cpp
-./ttl2dat <input .nt file>
+python continuous_ids.py --input <input .nt file>
 ```
+
+## Statistics
+This script computes some stats from the input .nt file, as a graph. In
+particular, the computed stats are:
+- in-degree and out-degree distribution (saved at in-degree.png and out-degree.png)
+- Number of triples with predicate belonging to different subsets of
+predicates. The subsets are given as an input file following the format
+```
+   #Subset1
+   <predicate 1>
+   <predicate 2>
+   ...
+   #Subset2
+   <predicate 1>
+   <predicate 2>
+   ...
+```
+For an example, check the file sets_predicates.txt
+
+```sh
+python get_stats.py --input <input .nt file> --subset-preds <.txt file with the subset of predicates>
+```
+
+
 
 ## Query engines
 
