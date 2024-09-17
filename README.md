@@ -31,6 +31,12 @@ python remove_properties.py --input <input .nt file> --output <output .nt file>
 | After filter 1            | 2,276,362,123      |
 | After filter 2            | 1,617,500,079 (26 properties deleted)      |
 
+### Filter 3: Remove properties that generate cycles (designed for containment relations/predicates)
+This filter removes all the properties that generate a cycle in the graph. The script is intented to work only with
+containment-related predicates, where a cycle can be considered as an error or a bug.
+
+**Under Construction**
+
 ## Continuous identifiers 
 The second step is to convert the filtered dataset into a new version using
 continuous identifiers for the subject/objects and predicates. The output
