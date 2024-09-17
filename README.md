@@ -77,6 +77,34 @@ relation) : 14,520,899
 - Frecuency of predicate [`P47`](http://www.wikidata.org/prop/direct/P47)
 (representing adjacency relation): 919,701
 
+### General stats
+The same script computes the following stats, considering the whole graph:
+
+#### Top 10 subjects/objects with higher in-degree
+1. 
+2. 
+3. 
+4. 
+5. 
+6. 
+7. 
+8. 
+9. 
+10. 
+
+#### Top 10 subjects/objects with higher out-degree
+1. 
+2. 
+3. 
+4. 
+5. 
+6. 
+7. 
+8. 
+9. 
+10. 
+
+#### In-degree and out-degree distri
 ![In-degree](img/in-degree.png) 
 ![Out-degree](img/out-degree.png) 
 ## Query engines
