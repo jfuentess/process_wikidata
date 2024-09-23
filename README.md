@@ -24,18 +24,28 @@ named `removed_properties.txt` with all  properties removed.
 python remove_properties.py --input <input .nt file> --output <output .nt file>
 ```
 
+### Filter 3: Remove properties that generate cycles (designed for containment relations/predicates)
+This filter removes all the triples that generate a cycle in the graph. The script is intented to work only with
+containment-related predicates, where a cycle can be considered as an error or a bug. However, the code is general enough
+to be applied to other predicates. As a byproduct, this filter generates a file named `removed_triples_cycle.txt` with all triples removed.
+The list of predicates to be considered is given as an input file following the format
+```
+   <predicate 1>
+   <predicate 2>
+   ...
+ ```
+For an example, check the file `cycle_predicates.txt`
+
+```sh
+python delete_cycles.py --input <input .nt file> --output <output .nt file> --subset-preds <.txt file with the subset of predicates>
+```
 
 | Dataset                   | Number of triples  |
 | ------------------------- | ------------------ |
 | latest-truthy (original)  | 8,254,120,518      |
 | After filter 1            | 2,276,362,123      |
 | After filter 2            | 1,617,500,079 (26 properties deleted)      |
-
-### Filter 3: Remove properties that generate cycles (designed for containment relations/predicates)
-This filter removes all the properties that generate a cycle in the graph. The script is intented to work only with
-containment-related predicates, where a cycle can be considered as an error or a bug.
-
-**Under Construction**
+| After filter 3            |  ( triples deleted)      |
 
 ## Continuous identifiers 
 The second step is to convert the filtered dataset into a new version using
@@ -67,7 +77,7 @@ predicates. The subsets are given as an input file following the format
    <predicate 2>
    ...
 ```
-For an example, check the file sets_predicates.txt
+For an example, check the `file sets_predicates.txt`
 
 ```sh
 python get_stats.py --input <input .nt file> --subset-preds <.txt file with the subset of predicates> --max-deg <limit degree>
