@@ -45,7 +45,7 @@ python delete_cycles.py --input <input .nt file> --output <output .nt file> --su
 | latest-truthy (original)  | 8,254,120,518      |
 | After filter 1            | 2,276,362,123      |
 | After filter 2            | 1,617,500,079 (26 properties deleted)      |
-| After filter 3            |  ( triples deleted)      |
+| After filter 3            | 1,604,348,698 (13,151,381 triples deleted)      |
 
 ## Continuous identifiers 
 The second step is to convert the filtered dataset into a new version using
