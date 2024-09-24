@@ -85,11 +85,14 @@ python get_stats.py --input <input .nt file> --subset-preds <.txt file with the 
 ### Stats from subsets of containment and adjacency relations 
 - Frecuency of predicates [`P150`](http://www.wikidata.org/prop/direct/P150) and
 [`P131`](http://www.wikidata.org/prop/direct/P131) (representing containment
-relation) : 14,520,899
+relation) (filter 1 + filter 2): 14,520,899
+- Frecuency of predicates [`P150`](http://www.wikidata.org/prop/direct/P150) and
+[`P131`](http://www.wikidata.org/prop/direct/P131) (representing containment
+relation) (filter 1 + filter 2 + filter 3): 1,369,518
 - Frecuency of predicate [`P47`](http://www.wikidata.org/prop/direct/P47)
 (representing adjacency relation): 919,701
 
-### General stats
+### General stats (After filter 1 + filter 2 + filter 3)
 #### Top 10 subjects/objects with higher in-degree
 1. [`Q13442814`](http://www.wikidata.org/entity/Q13442814): 41,928,868 (scholarly article -- article in an academic publication, usually peer reviewed)
 2. [`Q1860`](http://www.wikidata.org/entity/Q1860): 14,149,995 (English -- West Germanic language)
@@ -115,8 +118,8 @@ relation) : 14,520,899
 10. [`Q56754739`](http://www.wikidata.org/entity/Q56754739): 5,128 (Measurements of the Higgs boson production and decay rates and constraints on its couplings from a combined ATLAS and CMS analysis of the LHC pp collision data at sqrt(s)=7 and 8 TeV -- article)
 
 #### In-degree and out-degree distribution
-![In-degree](img/in-degree.png) 
-![Out-degree](img/out-degree.png) 
+![In-degree and out-degree](img/in-out-degree.png) 
+
 ## Query engines
 
 
