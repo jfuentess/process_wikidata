@@ -39,7 +39,7 @@ For an example, check the file `cycle_predicates.txt`
 ```sh
 python delete_cycles.py --input <input .nt file> --output <output .nt file> --subset-preds <.txt file with the subset of predicates>
 ```
-
+## Summary
 | Dataset                   | Number of triples  |
 | ------------------------- | ------------------ |
 | latest-truthy (original)  | 8,254,120,518      |
