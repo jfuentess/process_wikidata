@@ -117,7 +117,7 @@ relation) (filter 1 + filter 2 + filter 3): 1,369,518
 9. [`Q21558717`](http://www.wikidata.org/entity/Q21558717): 5,200 (Combined Measurement of the Higgs Boson Mass in pp Collisions at sqrt(s)=7 and 8 TeV with the ATLAS and CMS Experiments -- scientific article )
 10. [`Q56754739`](http://www.wikidata.org/entity/Q56754739): 5,128 (Measurements of the Higgs boson production and decay rates and constraints on its couplings from a combined ATLAS and CMS analysis of the LHC pp collision data at sqrt(s)=7 and 8 TeV -- article)
 
-#### In-degree and out-degree distribution
+#### In-degree and out-degree distribution (with --max-deg 1000)
 ![In-degree and out-degree](img/in-out-degree.png) 
 
 ## Query engines
