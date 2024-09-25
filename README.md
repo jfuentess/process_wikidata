@@ -30,11 +30,12 @@ containment-related predicates, where a cycle can be considered as an error or a
 to be applied to other predicates. As a byproduct, this filter generates a file named `removed_triples_cycle.txt` with all triples removed.
 The list of predicates to be considered is given as an input file following the format
 ```
-   <predicate 1>
-   <predicate 2>
+   <predicate 1> <direction>
+   <predicate 2> <direction>
    ...
  ```
-For an example, check the file `cycle_predicates.txt`
+where `<direction>` indicates how to interprete the triple SPO (0: S--P-->O, 1: O--P-->S). The direction is used, in particular, for predicates related with
+the containment relation. For an example, check the file `cycle_predicates.txt`
 
 ```sh
 python delete_cycles.py --input <input .nt file> --output <output .nt file> --subset-preds <.txt file with the subset of predicates>
@@ -45,7 +46,7 @@ python delete_cycles.py --input <input .nt file> --output <output .nt file> --su
 | latest-truthy (original)  | 8,254,120,518      |
 | After filter 1            | 2,276,362,123      |
 | After filter 2            | 1,617,500,079 (26 properties deleted)      |
-| After filter 3            | 1,604,348,698 (13,151,381 triples deleted)      |
+| After filter 3            | 1,615,616,023 (1,884,056 triples deleted)      |
 
 ## Continuous identifiers 
 The second step is to convert the filtered dataset into a new version using
@@ -77,7 +78,7 @@ predicates. The subsets are given as an input file following the format
    <predicate 2>
    ...
 ```
-For an example, check the `file sets_predicates.txt`
+For an example, check the file `sets_predicates.txt`
 
 ```sh
 python get_stats.py --input <input .nt file> --subset-preds <.txt file with the subset of predicates> --max-deg <limit degree>
@@ -88,7 +89,7 @@ python get_stats.py --input <input .nt file> --subset-preds <.txt file with the 
 relation) (filter 1 + filter 2): 14,520,899
 - Frecuency of predicates [`P150`](http://www.wikidata.org/prop/direct/P150) and
 [`P131`](http://www.wikidata.org/prop/direct/P131) (representing containment
-relation) (filter 1 + filter 2 + filter 3): 1,369,518
+relation) (filter 1 + filter 2 + filter 3): 12,636,843
 - Frecuency of predicate [`P47`](http://www.wikidata.org/prop/direct/P47)
 (representing adjacency relation): 919,701
 
