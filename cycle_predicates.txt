@@ -1,2 +1,2 @@
-<http://www.wikidata.org/prop/direct/P150>
-<http://www.wikidata.org/prop/direct/P131>
+<http://www.wikidata.org/prop/direct/P150> 0
+<http://www.wikidata.org/prop/direct/P131> 1

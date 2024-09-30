@@ -11,7 +11,7 @@ This filter is aimed to remove descriptions of Subjects/Objects in multiple
 languages, leaving only the English description
 
 ```sh
-python remove_labels_and_descriptions.py --input <input .nt file> --output <output .nt file>
+python remove_labels_and_descriptions.py < [input .nt file] > [output .nt file]
 ```
 
 
@@ -21,7 +21,7 @@ This filter removes all the properties not starting with
 named `removed_properties.txt` with all  properties removed.
 
 ```sh
-python remove_properties.py --input <input .nt file> --output <output .nt file>
+python remove_properties.py < [input .nt file] > [output .nt file]
 ```
 
 ### Filter 3: Remove properties that generate cycles (designed for containment relations/predicates)
@@ -41,6 +41,14 @@ the containment relation. For an example, check the file `cycle_predicates.txt`
 python delete_cycles.py --input <input .nt file> --output <output .nt file> --subset-preds <.txt file with the subset of predicates>
 ```
 ## Summary
+To apply all the filters to the Wikidata dump *latest-truthy.nt*, use
+
+```sh
+cat latest-truthy.nt | python3 remove_labels_and_descriptions.py | python3 remove_properties.py > latest-truthy_filtered.nt
+
+python delete_cycles.py --input latest-truthy_filtered.nt --output latest-truthy_filtered_nocycles.nt --subset-preds cycle_predicates.txt
+```
+
 | Dataset                   | Number of triples  |
 | ------------------------- | ------------------ |
 | latest-truthy (original)  | 8,254,120,518      |
@@ -92,6 +100,10 @@ relation) (filter 1 + filter 2): 14,520,899
 relation) (filter 1 + filter 2 + filter 3): 12,636,843
 - Frecuency of predicate [`P47`](http://www.wikidata.org/prop/direct/P47)
 (representing adjacency relation): 919,701
+- Frecuency of predicates [`P171`](http://www.wikidata.org/prop/direct/P171),
+[`P279`](http://www.wikidata.org/prop/direct/P279), [`P1647`](http://www.wikidata.org/prop/direct/P1647) and
+[`P397`](http://www.wikidata.org/prop/direct/P397) (representing containment
+relation) (filter 1 + filter 2 + filter 3): 8,820,421
 
 ### General stats (After filter 1 + filter 2 + filter 3)
 #### Top 10 subjects/objects with higher in-degree
