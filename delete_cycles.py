@@ -95,7 +95,8 @@ for name, value in options:
 
 ## Step 1: Read the list of predicate subsets        
 print("\n### Reading the list of predicate subsets")
-subset_preds = set()
+subset_preds_direct = set()
+subset_preds_reverse = set()
 
 if SUBSET_FILE != "":
     f1 = open(SUBSET_FILE, 'r', encoding='utf-8')
@@ -105,7 +106,12 @@ if SUBSET_FILE != "":
         if not(line):
             break
         else:
-            subset_preds.add(line.rstrip())
+            pred = line.split()[0]
+            direction = line.split()[1]
+            if direction == "0":
+                subset_preds_direct.add(pred)
+            elif direction == "1":
+                subset_preds_reverse.add(pred)
 
     f1.close()
 
@@ -133,10 +139,14 @@ while True:
         obj = triple[2:]
         obj = " ".join(obj[:-1])
         
-        if pred in subset_preds:
+        if pred in subset_preds_direct:
             g.addEdge(sub, obj, n)
             sources.add(sub) 
             targets.add(obj)
+        elif pred in subset_preds_reverse:
+            g.addEdge(obj, sub, n)
+            sources.add(obj) 
+            targets.add(sub)
            
     if n % 1000000 == 0:
         print("\rProcessing line", n, end="")
@@ -149,6 +159,7 @@ f1.close()
 print("\n### Computing the cycles")
 cycles = set()
 init_vertices = sources.difference(targets)
+print("\tinit_vertices:", len(init_vertices))
 g.DFS(cycles, init_vertices)
 
 ## Step 4: Get the new graph without cycles
