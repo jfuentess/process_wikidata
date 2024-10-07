@@ -24,10 +24,10 @@ named `removed_properties.txt` with all  properties removed.
 python remove_properties.py < [input .nt file] > [output .nt file]
 ```
 
-### Filter 3: Remove properties that generate cycles (designed for containment relations/predicates)
-This filter removes all the triples that generate a cycle in the graph. The script is intented to work only with
+### Filter 3: Remove invalid edges related to containment relations/predicates
+This filter removes all the triples that are invalid according to a containment relation. The script is intented to work only with
 containment-related predicates, where a cycle can be considered as an error or a bug. However, the code is general enough
-to be applied to other predicates. As a byproduct, this filter generates a file named `removed_triples_cycle.txt` with all triples removed.
+to be applied to other predicates. The filter works in two steps: 1) First, perform DFS traversals starting from at the vertices with in-degree 0, and 2) For all vertices not visited during the first step, perform a DFS traversal starting at an arbitrary vertex. As a byproduct, this filter generates a file named `removed_triples_cycle.txt` with all triples removed.
 The list of predicates to be considered is given as an input file following the format
 ```
    <predicate 1> <direction>
@@ -35,7 +35,7 @@ The list of predicates to be considered is given as an input file following the 
    ...
  ```
 where `<direction>` indicates how to interprete the triple SPO (0: S--P-->O, 1: O--P-->S). The direction is used, in particular, for predicates related with
-the containment relation. For an example, check the file `cycle_predicates.txt`
+the containment relation. For an example, check the file `containment_predicates.txt`
 
 ```sh
 python delete_cycles.py --input <input .nt file> --output <output .nt file> --subset-preds <.txt file with the subset of predicates>
