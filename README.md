@@ -38,7 +38,7 @@ where `<direction>` indicates how to interprete the triple SPO (0: S--P-->O, 1: 
 the containment relation. For an example, check the file `containment_predicates.txt`
 
 ```sh
-python delete_cycles.py --input <input .nt file> --output <output .nt file> --subset-preds <.txt file with the subset of predicates>
+python delete_invalid_edges.py --input <input .nt file> --output <output .nt file> --subset-preds <.txt file with the subset of predicates>
 ```
 ## Summary
 To apply all the filters to the Wikidata dump *latest-truthy.nt*, use
@@ -46,7 +46,7 @@ To apply all the filters to the Wikidata dump *latest-truthy.nt*, use
 ```sh
 cat latest-truthy.nt | python3 remove_labels_and_descriptions.py | python3 remove_properties.py > latest-truthy_filtered.nt
 
-python delete_cycles.py --input latest-truthy_filtered.nt --output latest-truthy_filtered_nocycles.nt --subset-preds cycle_predicates.txt
+python delete_invalid_edges.py --input latest-truthy_filtered.nt --output latest-truthy_filtered_nocycles.nt --subset-preds cycle_predicates.txt
 ```
 
 | Dataset                   | Number of triples  |
@@ -54,7 +54,7 @@ python delete_cycles.py --input latest-truthy_filtered.nt --output latest-truthy
 | latest-truthy (original)  | 8,254,120,518      |
 | After filter 1            | 2,276,362,123      |
 | After filter 2            | 1,617,500,079 (26 properties deleted)      |
-| After filter 3            | 1,615,616,023 (1,884,056 triples deleted)      |
+| After filter 3            | 1,615,616,023 (1,884,090 triples deleted)      |
 
 ## Continuous identifiers 
 The second step is to convert the filtered dataset into a new version using
