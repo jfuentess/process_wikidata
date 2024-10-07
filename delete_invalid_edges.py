@@ -1,11 +1,11 @@
-## This code deletes cycles in the graph represented by a .nt file. The deleted
-## edges/predicates are limited to predicates given in an input file following
-## the format 
+## This code deletes invalid edges in the graph represented by a .nt file. The deleted
+## edges/predicates are limited to predicates related to the containment
+## relation, given in an input file following the format 
 ##   <predicate 1>
 ##   <predicate 2>
 ##   ...
 ##
-##   For an example, check the file cycle_predicates.txt
+##   For an example, check the file containment_predicates.txt
 
 
 import getopt
@@ -46,9 +46,7 @@ class Graph:
     
     # The function to do DFS traversal. It uses recursive DFSUtil()
     # Assumption: The graph can be non-connected
-    def DFS(self, cycles, init_vertices):
-        # Create a list with the vertices to be visited and a set to store the cycles
-        visited = set() 
+    def DFS(self, cycles, init_vertices, visited = set()):
         n_components = 0
 
         # All the vertices to start a traversal (vertices with in-degree 0) 
@@ -68,6 +66,7 @@ class Graph:
                 n_components += 1
 
         print("# Number of components:", n_components)
+        print("# Number of visited vertices:", len(visited))
         print("# Number of edges to be deleted:", len(cycles))
         
 # Processing arguments
@@ -155,21 +154,31 @@ while True:
     
 f1.close()
 
-## Step 3: Get the set of edges to be deleted
-print("\n### Computing the cycles")
-cycles = set()
-init_vertices = sources.difference(targets)
-print("\tinit_vertices:", len(init_vertices))
-g.DFS(cycles, init_vertices)
 
-## Step 4: Get the new graph without cycles
-print("\n### Writing the graph without cycles")
+## Step 3: Get the set of edges to be deleted
+print("\n### Computing invalid edges (first pass)")
+cycles = set()
+visited = set()
+init_vertices = sources.difference(targets)
+all_vertices = sources.union(targets)
+
+print("\tinit_vertices:", len(init_vertices))
+print("\tnum vertices(union):", len(all_vertices))
+g.DFS(cycles, init_vertices, visited)
+
+print("\n### Computing invalid edges (second pass)")
+init_vertices = all_vertices.difference(visited)
+print("\tinit_vertices:", len(init_vertices))
+g.DFS(cycles, init_vertices, visited)
+
+
+## Step 4: Get the new graph without invalid edges
+print("\n### Writing the graph without invalid edges")
 f1 = open(SOURCE_FILE, 'r', encoding='utf-8')
 f2 = open(TARGET_FILE, 'w', encoding='utf-8')
 f3 = open(REMOVED_EDGES_FILE, 'w', encoding='utf-8')
 
 n=0
-g = Graph()
 
 while True:
     line = f1.readline()
