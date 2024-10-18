@@ -141,3 +141,13 @@ relation) (filter 1 + filter 2 + filter 3): 8,820,421
 ### Knowledge Graph of TIGER
 The **T**opologically **I**ntegrated **G**eographic **E**ncoding and **R**eferencing system ([TIGER](https://www2.census.gov/geo/tiger/)) dataset, produced by the US Census Bureau, is a public domain data source which has many geographic features. The following scripts extract a Knowledge graph from TIGER considering containment and adjacency relations.
 
+```sh
+python3 tiger/get_adjacency_relation.py --input <Path to *_edges.shp files> > tiger.nt
+
+python3 tiger/get_containment_relation.py --input <Path to *_faces.shp files> >> tiger.nt
+```
+### TODO
+Download TIGER 2024
+
+- [ ] https://www2.census.gov/geo/tiger/TIGER2024/EDGES/
+- [ ] https://www2.census.gov/geo/tiger/TIGER2024/FACES/
