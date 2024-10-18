@@ -136,3 +136,8 @@ relation) (filter 1 + filter 2 + filter 3): 8,820,421
 ## Query engines
 
 
+## Additional datasets
+
+### Knowledge Graph of TIGER
+The **T**opologically **I**ntegrated **G**eographic **E**ncoding and **R**eferencing system ([TIGER](https://www2.census.gov/geo/tiger/)) dataset, produced by the US Census Bureau, is a public domain data source which has many geographic features. The following scripts extract a Knowledge graph from TIGER considering containment and adjacency relations.
+
