@@ -11,7 +11,7 @@ This filter is aimed to remove descriptions of Subjects/Objects in multiple
 languages, leaving only the English description
 
 ```sh
-python remove_labels_and_descriptions.py < [input .nt file] > [output .nt file]
+python wikidata/remove_labels_and_descriptions.py < [input .nt file] > [output .nt file]
 ```
 
 
@@ -21,7 +21,7 @@ This filter removes all the properties not starting with
 named `removed_properties.txt` with all  properties removed.
 
 ```sh
-python remove_properties.py < [input .nt file] > [output .nt file]
+python wikidata/remove_properties.py < [input .nt file] > [output .nt file]
 ```
 
 ### Filter 3: Remove invalid edges related to containment relations/predicates
@@ -35,18 +35,18 @@ The list of predicates to be considered is given as an input file following the 
    ...
  ```
 where `<direction>` indicates how to interprete the triple SPO (0: S--P-->O, 1: O--P-->S). The direction is used, in particular, for predicates related with
-the containment relation. For an example, check the file `containment_predicates.txt`
+the containment relation. For an example, check the file `wikidata/containment_predicates.txt`
 
 ```sh
-python delete_invalid_edges.py --input <input .nt file> --output <output .nt file> --subset-preds <.txt file with the subset of predicates>
+python wikidata/delete_invalid_edges.py --input <input .nt file> --output <output .nt file> --subset-preds <.txt file with the subset of predicates>
 ```
 ## Summary
 To apply all the filters to the Wikidata dump *latest-truthy.nt*, use
 
 ```sh
-cat latest-truthy.nt | python3 remove_labels_and_descriptions.py | python3 remove_properties.py > latest-truthy_filtered.nt
+cat latest-truthy.nt | python3 wikidata/remove_labels_and_descriptions.py | python3 wikidata/remove_properties.py > latest-truthy_filtered.nt
 
-python delete_invalid_edges.py --input latest-truthy_filtered.nt --output latest-truthy_filtered_nocycles.nt --subset-preds cycle_predicates.txt
+python wikidata/delete_invalid_edges.py --input latest-truthy_filtered.nt --output latest-truthy_filtered_nocycles.nt --subset-preds cycle_predicates.txt
 ```
 
 | Dataset                   | Number of triples  |
@@ -64,7 +64,7 @@ the filtered dataset, one for subjects/objects (extensión `.nt.dat.SO`) and one
 for predicates (extension `.nt.dat.P`)
 
 ```sh
-python continuous_ids.py --input <input .nt file>
+python wikidata/continuous_ids.py --input <input .nt file>
 ```
 
 ## Statistics
@@ -86,10 +86,10 @@ predicates. The subsets are given as an input file following the format
    <predicate 2>
    ...
 ```
-For an example, check the file `sets_predicates.txt`
+For an example, check the file `wikidata/sets_predicates.txt`
 
 ```sh
-python get_stats.py --input <input .nt file> --subset-preds <.txt file with the subset of predicates> --max-deg <limit degree>
+python wikidata/get_stats.py --input <input .nt file> --subset-preds <.txt file with the subset of predicates> --max-deg <limit degree>
 ```
 ### Stats from subsets of containment and adjacency relations 
 - Frecuency of predicates [`P150`](http://www.wikidata.org/prop/direct/P150) and
