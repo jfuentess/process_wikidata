@@ -139,15 +139,49 @@ relation) (filter 1 + filter 2 + filter 3): 8,820,421
 ## Additional datasets
 
 ### Knowledge Graph of TIGER
-The **T**opologically **I**ntegrated **G**eographic **E**ncoding and **R**eferencing system ([TIGER](https://www2.census.gov/geo/tiger/)) dataset, produced by the US Census Bureau, is a public domain data source which has many geographic features. The following scripts extract a Knowledge graph from TIGER considering containment and adjacency relations.
+The **T**opologically **I**ntegrated **G**eographic **E**ncoding and
+**R**eferencing system ([TIGER](https://www2.census.gov/geo/tiger/)) dataset,
+produced by the US Census Bureau, is a public domain data source which has many
+geographic features. The following scripts extract a Knowledge graph from TIGER
+considering containment and adjacency relations. (**Note:** The scripts were
+tested with TIGER version 2024.)
+
+#### Step 1: Download the `*_edges` and `*_faces` files
+
+```sh
+mkdir edges
+cd edges
+bash ../tiger/download_tiger_edges.sh
+cd ..
+```
+
+```sh
+mkdir faces
+cd faces
+bash tiger/download_tiger_faces.sh
+cd ..
+```
+
+```sh
+cd edges
+bash decompress.sh
+cd ..
+```
+
+```sh
+cd faces
+bash decompress.sh
+cd ..
+```
+
+#### Step 2: Process the `*_edges` and `*_faces` files to obtain the first
+Knowledge graph
+
+The scripts follow the full documentation of TIGER available
+[here](https://www2.census.gov/geo/pdfs/maps-data/data/tiger/tgrshp2024/TGRSHP2024_TechDoc.pdf).
 
 ```sh
 python3 tiger/get_adjacency_relation.py --input <Path to *_edges.shp files> > tiger.nt
 
 python3 tiger/get_containment_relation.py --input <Path to *_faces.shp files> >> tiger.nt
 ```
-### TODO
-Download TIGER 2024
-
-- [ ] https://www2.census.gov/geo/tiger/TIGER2024/EDGES/
-- [ ] https://www2.census.gov/geo/tiger/TIGER2024/FACES/

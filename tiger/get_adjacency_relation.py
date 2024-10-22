@@ -12,6 +12,7 @@
 import sys
 import os
 import shapefile
+import getopt
 
 def process_edges_shp(directory):
     vertices = {}
@@ -25,7 +26,7 @@ def process_edges_shp(directory):
             num_files += 1
 
             if num_files%100 == 0:
-                print("Processed files:", num_files)
+                print("Processed files:", num_files, file=sys.stderr)
 
             # Read the ShapeFile
             sf = shapefile.Reader(directory + filename)
@@ -57,14 +58,14 @@ def process_edges_shp(directory):
         else:
             continue
 
-    print("Total number of processed files: ", num_files)
+    print("Total number of processed files: ", num_files, file=sys.stderr)
         
     total_relations = 0
     for vtx in vertices.values():
         total_relations += len(vtx)
 
-    print("total relations (unique)   :", total_relations)
-    print("total elements:", len(vertices))
+    print("total relations (unique)   :", total_relations, file=sys.stderr)
+    print("total elements:", len(vertices), file=sys.stderr)
 
     # Write the adjacency relations in .nt format
     for src in vertices:
@@ -77,8 +78,9 @@ def process_edges_shp(directory):
 argv = sys.argv[1:]
 try:
     options, args = getopt.getopt(argv, "i:", ["input="])
+
 except:
-    print("Usage: ", argv[0], " --input <Path to .shp edges files>")
+    print("Usage: ", sys.argv[0], " --input <Path to .shp edges files>", file=sys.stderr)
 
 SOURCE_PATH=""
 for name, value in options:

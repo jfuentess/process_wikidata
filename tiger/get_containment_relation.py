@@ -24,9 +24,10 @@
 import shapefile
 import sys
 import os
+import getopt
 #import pickle
 
-def read_faces_shp(directory):
+def process_faces_shp(directory):
 
     lim = 0
     # Dictionaries to store containment between consecutive levels of the hierarchy
@@ -41,7 +42,7 @@ def read_faces_shp(directory):
         if filename.endswith(".shp"):    
             lim += 1
             if lim % 100 == 1:
-                print("Processed files:", lim)
+                print("Processed files:", lim, file=sys.stderr)
 
             sf = shapefile.Reader(directory + filename)
   
@@ -72,7 +73,7 @@ def read_faces_shp(directory):
         else:
             continue
 
-    print("Total number of processed files: ", lim)
+    print("Total number of processed files: ", lim, file=sys.stderr)
 
     # Write the containment relations in .nt format
     for key, value in county_state.items():
@@ -96,7 +97,7 @@ argv = sys.argv[1:]
 try:
     options, args = getopt.getopt(argv, "i:", ["input="])
 except:
-    print("Usage: ", argv[0], " --input <Path to .shp faces files>")
+    print("Usage: ", sys.argv[0], " --input <Path to .shp faces files>", file=sys.stderr)
 
 SOURCE_PATH=""
 for name, value in options:
